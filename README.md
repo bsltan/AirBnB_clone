@@ -1,50 +1,75 @@
-# AirBnB Clone
-So this project is the first step towards building a first full web application (which is an AirBnB clone). This first step consists of a custom command-line interface for data management, and the base classes for the storage of this data.
+```
 
-## Step 1: Write a command interpreter (Console)
+░█████╗░██╗██████╗░██████╗░███╗░░██╗██████╗░  ░█████╗░██╗░░░░░░█████╗░███╗░░██╗███████╗
+██╔══██╗██║██╔══██╗██╔══██╗████╗░██║██╔══██╗  ██╔══██╗██║░░░░░██╔══██╗████╗░██║██╔════╝
+███████║██║██████╔╝██████╦╝██╔██╗██║██████╦╝  ██║░░╚═╝██║░░░░░██║░░██║██╔██╗██║█████╗░░
+██╔══██║██║██╔══██╗██╔══██╗██║╚████║██╔══██╗  ██║░░██╗██║░░░░░██║░░██║██║╚████║██╔══╝░░
+██║░░██║██║██║░░██║██████╦╝██║░╚███║██████╦╝  ╚█████╔╝███████╗╚█████╔╝██║░╚███║███████╗
+╚═╝░░╚═╝╚═╝╚═╝░░╚═╝╚═════╝░╚═╝░░╚══╝╚═════╝░  ░╚════╝░╚══════╝░╚════╝░╚═╝░░╚══╝╚══════╝
+```
 
+![AirBnB](assets/hbnb_logo.png)
 
-## Models
+## DESCRIPTION
 
-The folder [models](./models/) contains all the classes used in this project.
+**AirBnB** is a *complete web application*, integrating database storage, a back-end API, and front-end interface.
 
-- a unique id generated using ```uuid``` package
-- the attribute ```created_at```, a ```datetime``` object, indicating when the object is created
-- the attribute ```updated_at```, a ```datetime``` object, indicating when the object is last updated
-- the attribute ```__class__```, a ```str``` object, indicating what is the object's type (model)
+This is part 1 of our AirBnb Clone project. The purpose of this project is to make a command interpreter that manages our AirBnb objects.
 
-File | Description | Attributes
----- | ----------- | ----------
-[base_model.py](./models/base_model.py) | BaseModel class for all the other classes | id, created_at, updated_at
-[user.py](./models/user.py) | User class for future user information | email, password, first_name, last_name
-[amenity.py](./models/amenity.py) | Amenity class for future amenity information | name
-[city.py](./models/city.py) | City class for future location information | state_id, name
-[state.py](./models/state.py) | State class for future location information | name
-[place.py](./models/place.py) | Place class for future accomodation information | city_id, user_id, name, description, number_rooms, number_bathrooms, max_guest, price_by_night, latitude, longitude, amenity_ids
-[review.py](./models/review.py) | Review class for future user/host review information | place_id, user_id, text
+#### Data Diagram
 
-## File storage
+![data_diagram](assets/data_diagram.jpg)
 
-The folder [engine](./models/engine/) manages the serialization and deserialization of all the data, following a JSON format.
+## CONCEPTS LEARNT
 
-A FileStorage class is defined in [file_storage.py](./models/engine/file_storage.py) with methods to follow this flow:
-```<object> -> to_dict() -> <dictionary> -> JSON dump -> <json string> -> FILE -> <json string> -> JSON load -> <dictionary> -> <object>```
+-    How to create a Python package
+-    How to create a command interpreter in Python using the `cmd` module
+-    What is Unit testing and how to implement it in a large project
+-    How to serialize and deserialize a Class
+-    How to write and read a JSON file
+-    How to manage `datetime`
+-    What is an `UUID`
+-    What is `*args` and how to use it
+-    What is `**kwargs` and how to use it
+-    How to handle named arguments in a function
 
-The [__init__.py](./models/__init__.py) file contains the instantiation of the FileStorage class called **storage**, followed by a call to the method reload() on that instance.
-This allows the storage to be reloaded automatically at initialization, which recovers the serialized data.
+## SYNOPSIS
 
+#### Starting the Commandline Interpreter
+The Commandline Interpreter can be started by executing the command `./console.py`. The `console` can `create`, `destroy`, and `update` objects. Type `help` within the console to get a list of command options and its function.
 
+**Example:**
+```bash
+firdaus@ubuntu:~$ ./console.py
+(hbnb) help
 
+Documented commands (type help <topic>):
+========================================
+EOF  create  help  quit
 
-## Resources
-- [cmd module](https://docs.python.org/3.8/library/cmd.html)
-- [packages concept page](https://alx-intranet.hbtn.io/concepts/74)
-- [uuid module](https://docs.python.org/3.8/library/uuid.html)
-- [datetime](https://docs.python.org/3.8/library/datetime.html)
-- [unittest module](https://docs.python.org/3.8/library/unittest.html#module-unittest)
-- [args/kwargs](https://yasoob.me/2013/08/04/args-and-kwargs-in-python-explained/)
-- [Python test cheatsheet](https://www.pythonsheets.com/notes/python-tests.html)
+Undocumented commands:
+======================
+all  destroy  show  update
 
-# AUTHOR
-- Brian Surtan |[Email] (brynsultan@gmail.com) |[GitHub](https://github.com/bsltan)
-- Chukwuneke Ike |[Email] (chukwunekenwosu@gmail.com) |[Github] (https://github.com/Chukwunekeike)
+(hbnb) help quit
+Quit command to exit the program
+(hbnb) quit
+firdaus@ubuntu:~$
+```
+### OBJECTS IMPLEMENTED
+This repository contains the following files:
+
+| Folder | File | Description |
+| :--- | :--- | :--- |
+| tests |  | Contains test files for AirBnb Clone |
+|  | console.py | Command line Interpreter for managing AirBnB objects |
+| models | base_model.py | Defines all common attributes/methods for other classes |
+| models | amenity.py | Creates class `amenity` |
+| models | city.py | Creates class `city` |
+| models | place.py | Creates class `place` |
+| models | review.py | Creates class `review` |
+| models | state.py | Creates class `state` |
+| models | user.py | Creates class `user` |
+| models/engine/ | file_storage.py | Serializes instances to a JSON file and deserializes JSON file to instances |
+| To be updated |
+
